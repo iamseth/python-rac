@@ -11,9 +11,9 @@ Usage
 
 PXE boot a host
 
-./racadm.py -H 10.0.0.100 -u admin -p password123 -c "config -g cfgServerInfo -o cfgServerFirstBootDevice pxe"
-./racadm.py -H 10.0.0.100 -u admin -p password123 -c "config -g cfgServerInfo -o cfgServerBootOnce 1"
-./racadm.py -H 10.0.0.100 -u admin -p password123 -c "serveraction powercycle"
+./racadm.py -H 10.0.0.100 -u admin -p password123 -c "config -g cfgServerInfo -o cfgServerFirstBootDevice pxe"   
+./racadm.py -H 10.0.0.100 -u admin -p password123 -c "config -g cfgServerInfo -o cfgServerBootOnce 1"   
+./racadm.py -H 10.0.0.100 -u admin -p password123 -c "serveraction powercycle"   
 
 
 License
