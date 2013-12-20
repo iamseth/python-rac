@@ -1,4 +1,4 @@
-import racadm
+import rac
 import unittest
 
 TEST_HOST = 'localhost'
@@ -8,7 +8,7 @@ TEST_PASSWORD = 'password123'
 class TestRAC(unittest.TestCase):
 
     def setUp(self):
-        self.rac = racadm.RAC(TEST_HOST, TEST_USERNAME, TEST_PASSWORD)
+        self.rac = rac.RAC(TEST_HOST, TEST_USERNAME, TEST_PASSWORD)
 
     def test_inject_header(self):
         req = self.rac._inject_header('')
