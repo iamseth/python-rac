@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import aaargh
 import urllib2
-import argparse
 
 class RAC(object):
 
