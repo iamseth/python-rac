@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+import argparse
+from rac import RAC
+
+
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('-H', '--host', required=True, type=str, dest='host')
+parser.add_argument('-u', '--username', required=True, type=str, dest='username')
+parser.add_argument('-p', '--password', required=True, type=str, dest='password')
+parser.add_argument('-c', '--command', required=True, type=str, dest='cmd')
+
+rac = RAC(parser.parse_args().host,
+        parser.parse_args().username, parser.parse_args().password)
+
+print rac.run_command(parser.parse_args().cmd)  
+
