@@ -16,6 +16,7 @@ pip install rac
 
 ```bash
 python setup.py test
+python setup.py build
 sudo python setup.py install
 ```
 
