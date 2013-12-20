@@ -10,5 +10,6 @@ setup(name='rac',
     url='https://github.com/migrantgeek/python-rac',
     py_modules=['rac',],
     scripts=['bin/racadm'],
-    test_suite='tests'
+    test_suite='tests',
+    keywords = ['dell', 'rac', 'drac']
 )

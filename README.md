@@ -7,6 +7,13 @@ Implementation of racadm in pure Python
 Installation
 =============
 
+### PyPi
+```bash
+pip install rac
+```
+
+### Manually
+
 ```bash
 python setup.py test
 sudo python setup.py install
