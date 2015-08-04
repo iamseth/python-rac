@@ -10,6 +10,12 @@ class RAC(object):
         self.username = username
         self.password = password
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, ex_type, ex_value, ex_tb):
+        self._logout()
+
     def _inject_header(self, data):
         if data is not None:
             return "<?xml version='1.0'?>" + data
