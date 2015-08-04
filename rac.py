@@ -41,9 +41,8 @@ class RAC(object):
         self.sid = self._extract_sid(resp)
 
     def _logout(self):
-        self.sid = None
         self._make_request('/logout')
-
+        self.sid = None
     def run_command(self, cmd):
         if self.sid is None:
             self._login()
