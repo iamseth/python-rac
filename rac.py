@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
 import urllib2
+import ssl
 
 class RAC(object):
 
-    def __init__(self, host, username, password):
+    def __init__(self, host, username, password, certfile=None):
         self.sid = None
         self.host = host
         self.username = username
         self.password = password
+        self.certfile = certfile
 
     def __enter__(self):
         return self
@@ -35,11 +37,19 @@ class RAC(object):
         return self._extract_value(data, 'CMDOUTPUT')
 
     def _make_request(self, uri, data=None):
-        opener = urllib2.build_opener()
+        req = urllib2.Request('https://%s/cgi-bin/%s' % (self.host, uri), data=self._inject_header(data))
         if self.sid:
-            opener.addheaders.append(('Cookie', 'sid=%s' % self.sid))
-        return opener.open('https://%s/cgi-bin/%s' % (self.host, uri),
-                self._inject_header(data)).read()
+            req.add_header('Cookie', 'sid=%s' % self.sid)
+        if self.certfile is None:
+            try:
+                return urllib2.urlopen(req).read()
+            except urllib2.URLError:
+                ctx = ssl.create_default_context()
+                ctx.check_hostname = False
+                ctx.verify_mode = ssl.CERT_NONE
+                return urllib2.urlopen(req, context=ctx).read()
+        else:
+            return urllib2.urlopen(req, cafile=self.certfile).read()
 
     def _login(self):
         data = '<LOGIN><REQ><USERNAME>%s</USERNAME><PASSWORD>%s</PASSWORD></REQ></LOGIN>' % (self.username, self.password)
@@ -74,4 +84,3 @@ class RAC(object):
 
     def powerup(self):
         return self.run_command('serveraction powerup')
-
